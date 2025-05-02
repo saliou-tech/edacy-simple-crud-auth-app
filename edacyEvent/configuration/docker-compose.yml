@@ -1,0 +1,15 @@
+services:
+  mysql:
+    container_name: "mysql-edacy-event"
+    image: mysql:8.0
+    ports:
+      - "3304:3306"  # Host:Container
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=edacyEventDb
+      - MYSQL_PASSWORD=root
+    volumes:
+      - edacy-event-mysql-volume:/var/lib/mysql
+
+volumes:
+  edacy-event-mysql-volume:
