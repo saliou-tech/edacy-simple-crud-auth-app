@@ -1,0 +1,34 @@
+<div class="d-flex justify-content-center align-items-center vh-100">
+  <div class="form-container text-center">
+    <div class="form-image mb-3">
+      <img src="assets/edacy.jpg" alt="Logo" class="img-fluid mx-auto d-block" style="max-width: 150px;">
+    </div>
+
+    <form class="form-signin login-form">
+      <h3 class="txt-color-mg text-center mb-4">Connexion</h3>
+      <br>
+      <mat-error class="error-message"  *ngIf = "erroField">
+        {{message}}
+      </mat-error>
+
+      <div class="mb-3">
+        <input class="form-control"
+               placeholder="username" required autofocus [(ngModel)] = "this.userLogin.email" name="username">
+      </div>
+
+      <div class="mb-3">
+        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required [(ngModel)] = "this.userLogin.password" name="password">
+      </div>
+      <mat-error>
+        Please provide a valid password
+      </mat-error>
+      <div class="mb-3 text-center">
+        <button class="btn custom-edacy-btn" type="submit" class="color-button"  [class.spinner]="loading"  (click)="logAdmin()">Log in</button>
+      </div>
+
+      <div class="text-center mt-2">
+        <a href="/register" class="btn btn-link">Nouvelle utilisateur ? S'inscrire</a>
+      </div>
+    </form>
+  </div>
+</div>

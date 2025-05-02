@@ -1,0 +1,19 @@
+.form-container {
+  max-width: 400px;
+  width: 100%;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+.custom-edacy-btn {
+  background-color: #C62828; /* Couleur approximative d'Edacy */
+  color: white;
+  padding: 10px 30px;
+  border: none;
+  border-radius: 5px;
+}
+
+.custom-edacy-btn:hover {
+  background-color: #b71c1c; /* plus foncé au survol */
+}

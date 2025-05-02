@@ -1,0 +1,24 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.sidebar {
+  width: 250px;
+  height: 100vh;
+  background-color: #ffc107; /* yellow */
+  color: black;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 1rem;
+}
+
+.nav-link {
+  color: black;
+}
+
+.nav-link.active {
+  background-color: black !important;
+  color: yellow !important;
+}

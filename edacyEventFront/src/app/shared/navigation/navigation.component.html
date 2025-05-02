@@ -1,0 +1,32 @@
+<!-- Sidebar Navigation -->
+<div class="d-flex flex-column p-3 bg-warning text-black rounded-end shadow" style="width: 250px;">
+  <ul class="nav nav-pills flex-column gap-2" id="sidebarNav" role="tablist"
+      style="--bs-nav-link-color: black; --bs-nav-pills-link-active-color: yellow; --bs-nav-pills-link-active-bg: black;">
+
+    <li class="nav-item" role="presentation">
+      <a class="nav-link rounded"
+         routerLink="/evenements"
+         routerLinkActive="active"
+         [routerLinkActiveOptions]="{ exact: true }">
+        Événements
+      </a>
+    </li>
+
+    <li class="nav-item" role="presentation">
+      <a class="nav-link rounded"
+         routerLink="/profile"
+         routerLinkActive="active">
+        Profile
+      </a>
+    </li>
+
+    <li class="nav-item" role="presentation">
+      <a class="nav-link rounded"
+         routerLink="/contact"
+         routerLinkActive="active">
+        Contact
+      </a>
+    </li>
+
+  </ul>
+</div>
