@@ -1,0 +1,15 @@
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* prend toute la hauteur de la fenêtre */
+}
+
+.example-form {
+  width: 100%;
+  max-width: 500px; /* limite la largeur du formulaire */
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background: white;
+  border-radius: 8px;
+}

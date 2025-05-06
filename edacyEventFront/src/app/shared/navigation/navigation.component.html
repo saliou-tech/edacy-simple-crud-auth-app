@@ -5,26 +5,18 @@
 
     <li class="nav-item" role="presentation">
       <a class="nav-link rounded"
-         routerLink="/evenements"
+         routerLink="evenements"
          routerLinkActive="active"
          [routerLinkActiveOptions]="{ exact: true }">
         Événements
       </a>
     </li>
 
-    <li class="nav-item" role="presentation">
-      <a class="nav-link rounded"
-         routerLink="/profile"
-         routerLinkActive="active">
-        Profile
-      </a>
-    </li>
+
 
     <li class="nav-item" role="presentation">
-      <a class="nav-link rounded"
-         routerLink="/contact"
-         routerLinkActive="active">
-        Contact
+      <a class="nav-link rounded" routerLinkActive="active" (click)="signOut()">
+       Deconnexion
       </a>
     </li>
 

@@ -19,7 +19,6 @@ public class EventDto {
 
     private String description;
     private String lieu;
-    private LocalDateTime date;
     private Integer nombrePlace;
 
 

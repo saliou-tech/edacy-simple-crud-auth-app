@@ -5,7 +5,7 @@ import {AuthModule} from "./auth/auth.module";
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {DashboardModule} from "./dashboard/dashboard.module";
-
+import {MatDatepickerModule} from '@angular/material/datepicker';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -21,7 +21,7 @@ import { UtilisateursComponent } from './utilisateurs/utilisateurs.component';
 import {MatPaginator} from "@angular/material/paginator";
 import {MatFormField} from "@angular/material/form-field";
 import {MatOption, MatSelect} from "@angular/material/select";
-import {MatDialogActions} from "@angular/material/dialog";
+import {MatDialogActions, MatDialogContent} from "@angular/material/dialog";
 import {
   MatCell, MatCellDef,
   MatColumnDef,
@@ -36,22 +36,33 @@ import {MatButton, MatIconButton} from "@angular/material/button";
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 import {MatSort} from "@angular/material/sort";
 import {MatIcon} from "@angular/material/icon";
-
+import { EvenementFormComponent } from './evenement-form/evenement-form.component';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatIconModule} from '@angular/material/icon';
+import {MatInputModule} from '@angular/material/input';
+import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from "@angular/material/datepicker";
+import {MatProgressBar} from "@angular/material/progress-bar";
+import {MatTooltip} from "@angular/material/tooltip";
 @NgModule({
   declarations: [
     AppComponent,
     EvenementComponent,
     UtilisateursComponent,
+    EvenementFormComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
+    MatFormFieldModule,
     AuthRoutingModule,
+    MatDatepickerModule,
     AuthModule,
     DashboardModule,
     HttpClientModule,
     AppRoutingModule,
+    MatIconModule,
+    MatInputModule,
     SharedModule,
     MatPaginator,
     MatFormField,
@@ -74,7 +85,13 @@ import {MatIcon} from "@angular/material/icon";
     MatRowDef,
     MatNoDataRow,
     MatCellDef,
-    MatHeaderCellDef
+    MatHeaderCellDef,
+    MatDatepickerInput,
+    MatDatepickerToggle,
+    MatDatepicker,
+    MatProgressBar,
+    MatDialogContent,
+    MatTooltip
   ],
 
   providers: [

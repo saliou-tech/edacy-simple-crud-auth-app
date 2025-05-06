@@ -1,0 +1,53 @@
+
+<div class="container">
+  <form class="example-form" *ngIf="!isshowDeleteDialog">
+
+    <h3 class="text-center">Ajout Evenement</h3>
+    <mat-error class="error-message text-center" *ngIf="erroField">
+      {{ message }}
+    </mat-error>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Nom</mat-label>
+      <input matInput placeholder="Nom de l'evenement" [(ngModel)]="this.evenement.nom" name="nom">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Description</mat-label>
+      <textarea matInput placeholder="Description" [(ngModel)]="this.evenement.description" name="description"></textarea>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Lieu</mat-label>
+      <input matInput placeholder="Lieu" [(ngModel)]="this.evenement.lieu" name="lieu">
+    </mat-form-field>
+
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Nombre de Place</mat-label>
+      <input matInput placeholder="nombre de place disponible" type="number" [(ngModel)]="this.evenement.nombrePlace" name="nombrePlace">
+    </mat-form-field>
+
+
+    <mat-dialog-actions class="dialog-actions">
+      <button mat-raised-button (click)="saveEvenement()">Enregistrer</button>
+      <button mat-raised-button (click)="cancelEvenement()">Annuler</button>
+    </mat-dialog-actions>
+
+  </form>
+
+  <mat-progress-bar mode="indeterminate" *ngIf="showSpinner"></mat-progress-bar>
+
+  <div *ngIf="isshowDeleteDialog">
+    <mat-error class="error-message text-center" *ngIf="erroField">
+      {{ message }}
+    </mat-error>
+    <mat-dialog-content>
+      Voulez-vous vraiment supprimer cette Evenement ?
+    </mat-dialog-content>
+    <mat-dialog-actions class="dialog-actions">
+      <button mat-raised-button color="warn" (click)="supprimerEvenement()">Oui</button>
+      <button mat-raised-button (click)="cancelEvenement()">Non</button>
+    </mat-dialog-actions>
+  </div>
+</div>

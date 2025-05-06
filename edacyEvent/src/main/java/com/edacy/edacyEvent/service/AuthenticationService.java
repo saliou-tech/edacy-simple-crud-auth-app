@@ -38,13 +38,7 @@ public class AuthenticationService {
             User user = new User();
             user.setFullName(input.getFullName());
             user.setEmail(input.getEmail());
-            if(input.getPassword().equals("")){
-                user.setPassword(passwordEncoder.encode("123456"));
-               // user.setNeedsPasswordChange(true);
-            }else{
-                user.setPassword(passwordEncoder.encode(input.getPassword()));
-            //    user.setNeedsPasswordChange(false);
-            }
+            user.setPassword(passwordEncoder.encode(input.getPassword()));
             user.setAdresse(input.getAdresse());
             user.setTelephone(input.getTelephone());
             user.setProfile(input.getProfile());

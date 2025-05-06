@@ -39,7 +39,6 @@ public class EventService {
             Optional<Event> event=eventRepository.findById(cdto.getId());
             if(event!=null){
                 event.get().setDescription(cdto.getDescription());
-                event.get().setDate(cdto.getDate());
                 event.get().setDescription(cdto.getDescription());
                 event.get().setNom(cdto.getNom());
                 event.get().setLieu(cdto.getLieu());

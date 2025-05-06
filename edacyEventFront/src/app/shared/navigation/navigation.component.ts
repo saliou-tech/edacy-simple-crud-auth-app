@@ -33,7 +33,7 @@ export class NavigationComponent implements OnInit,AfterViewInit{
     {
       route: '/dashboard/users',
       icon: 'table_view',
-      label: 'Mes Boutiques',
+      label: 'Mes Evenements',
       profile: 'SUPERADMIN',
     }
 
@@ -55,7 +55,7 @@ export class NavigationComponent implements OnInit,AfterViewInit{
     if (this.user.profile === 'USER')
       this.paths = this.paths.filter((path) => path.profile === this.user.profile);
     else if (this.user.profile === 'ADMIN') {
-      // ADMIN sees all paths except boutique
+      // ADMIN sees all paths except Evenement
       this.paths = this.paths.filter(path =>  path.label !== 'Client');
     }
 

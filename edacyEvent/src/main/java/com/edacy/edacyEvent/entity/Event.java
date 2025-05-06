@@ -29,8 +29,7 @@ public class Event {
     @Lob
     @Column(name = "LIEU")
     private String lieu;
-    @Column(name = "DA_EVENT")
-    private LocalDateTime date;
+
     @Column(name = "NU_PLACE")
 
     private Integer nombrePlace;

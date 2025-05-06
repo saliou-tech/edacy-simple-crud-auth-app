@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit{
         localStorage.setItem('user',JSON.stringify(this.currentUser))
         this.loading = false;
         this.showSpinner=false;
-        this.router.navigate(['dashboard']);
+        this.router.navigate(['/dashboard/evenements']);
 
         /*if (data.needsPasswordChange) {
           this.openDialog()

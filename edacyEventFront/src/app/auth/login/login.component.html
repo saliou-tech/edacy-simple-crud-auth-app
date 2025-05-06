@@ -19,8 +19,8 @@
       <div class="mb-3">
         <input type="password" id="inputPassword" class="form-control" placeholder="Password" required [(ngModel)] = "this.userLogin.password" name="password">
       </div>
-      <mat-error>
-        Please provide a valid password
+      <mat-error class="error-message"  *ngIf = "erroField">
+        {{message}}
       </mat-error>
       <div class="mb-3 text-center">
         <button class="btn custom-edacy-btn" type="submit" class="color-button"  [class.spinner]="loading"  (click)="logAdmin()">Log in</button>

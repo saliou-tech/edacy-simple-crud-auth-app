@@ -1,70 +1,84 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit,ChangeDetectionStrategy, Component, inject, OnInit, ViewChild} from '@angular/core';
 import {MatTableDataSource} from "@angular/material/table";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
 import {faPlus} from "@fortawesome/free-solid-svg-icons";
 import {Subscription} from "rxjs";
 import {EvenementService} from "../evenement.service";
-
+import {MatButtonModule} from '@angular/material/button';
+import {
+  MatDialog,
+  MatDialogActions,
+  MatDialogClose,
+  MatDialogContent,
+  MatDialogRef,
+  MatDialogTitle,
+} from '@angular/material/dialog';
+import {EvenementFormComponent} from "../evenement-form/evenement-form.component";
+import {Router} from "@angular/router";
+import {AuthService} from "../auth/auth.service";
 @Component({
   selector: 'app-evenement',
   templateUrl: './evenement.component.html',
-  styleUrl: './evenement.component.css'
+  styleUrl: './evenement.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EvenementComponent  implements AfterViewInit,OnInit{
-  stores=[];
-  displayedColumns: string[] = ['id', 'nom', 'description' ,'lieu',"actions"];
-  // @ts-ignore
+  displayedColumns: string[] = ['id', 'nom', 'description', 'lieu', 'nombrePlace',"actions"];
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator: any;
   @ViewChild(MatSort) sort: any;
-  protected nomBoutique="";
 
   plus =faPlus;
-  categories :any =[]
-  private categoryAddedSub: Subscription | undefined;
+  evenements :any =[]
+  private evenementAddedSub: Subscription | undefined;
 
-  private categoryDeleted: Subscription | undefined;
+  private evenementDeleted: Subscription | undefined;
 
   private isopenDialogue: boolean=false;
-  private categoriesByStores: any;
   private user: any | null;
-  isAuthorizedTodeleteAndEdit: boolean=false;
-  protected isAdmin=false;
-  private store_id: any;
-  // protected readonly plus = faPlus;
-  boutiques: any  ;
-  private selectedBoutique_id: any;
-  ngAfterViewInit(): void {
-  }
+  protected isAuthorizedTodeleteAndEditANDCREATE: boolean=false;
+  protected imageUrl: string | undefined;
+
+
 
   ngOnInit(): void {
-  }
-  constructor(private evenementService: EvenementService) {}
+    if (this.authService.fetchFromSessionStorage() !== null){
+      console.log("user",this.user)
 
-  fetchEvenements() {
-    this.evenementService.getAllEvenements().subscribe({
-      next: (data) => {
-        this.dataSource = new MatTableDataSource(data);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-      },
-      error: (err) => console.error('Failed to load events', err)
-    });
+        this.evenements = this.getAllEvenements();
+        console.log("evenements",this.evenements)
+        // this.imageUrl = this.evenementsService.getImageUrl(this.evenements.logo);
+        console.log("imageUrl",this.imageUrl)
+
+        this.evenementAddedSub = this.evenementService.evenementAdded$.subscribe(() => {
+          this.getAllEvenements();
+        });
+        this.evenementDeleted = this.evenementService.evenementDeleted$.subscribe(() => {
+          this.getAllEvenements();
+        });
+      }
+
+
+
+
+
   }
-  createEvenement(eventData: any) {
-    this.evenementService.createEvenement(eventData).subscribe({
-      next: () => this.fetchEvenements(),
-      error: (err) => console.error('Error creating event', err)
-    });
+  constructor(public dialog: MatDialog,public evenementService: EvenementService,private authService:AuthService,
+              private router:Router) {
+
+    // @ts-ignore
+    this.dataSource = new MatTableDataSource([]);
   }
-  deleteEvenement(id: string) {
-    if (confirm('Are you sure you want to delete this event?')) {
-      this.evenementService.deleteEvenement(id).subscribe({
-        next: () => this.fetchEvenements(),
-        error: (err) => console.error('Error deleting event', err)
-      });
+
+  ngAfterViewInit() {
+    if (this.paginator) {
+      this.dataSource.paginator = this.paginator;
     }
+    if (this.sort) {
+      this.dataSource.sort = this.sort;
+    }
+    this.dataSource._updateChangeSubscription();  // Ensure data source is updated after view initialization
   }
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -74,10 +88,47 @@ export class EvenementComponent  implements AfterViewInit,OnInit{
       this.dataSource.paginator.firstPage();
     }
   }
+  openDialog(row :any = null) {
+    this.isopenDialogue=false;
+    this.dialog.open(EvenementFormComponent, {
+      width: '600px',
+      height: '800px',
+      data: { row: row }
+    });
+  }
+  getAllEvenements(): void {
+    this.evenementService.fetchAllEvenements().subscribe((data: any) => {
+      this.evenements = data;
+      this.dataSource.data = this.evenements;
+      console.log('Depots loaded:', this.evenements);
+    });
+  }
+  editEvenement(row:any) {
+    console.log("row",row);
+    this.openDialog(row);
+
+  }
+  deleteEvenement(row:any) {
+    console.log("row",row);
+    this.isopenDialogue=true;
+    this.openDialogDelete(row,0,0);
+
+  }
+
+  openDialogDelete(row: any, enterAnimationDuration: any, exitAnimationDuration: any): void {
+
+    this.dialog.open(EvenementFormComponent, {
+      width: '250px',
+      enterAnimationDuration,
+      exitAnimationDuration,
+      data: { isopenDialogue: this.isopenDialogue, row: row }
+    });
+  }
+
+
 
 // Example stub if you plan to implement modal dialog
-  openDialog() {
-    // Open your event creation dialog here
-  }
+
+
 
 }

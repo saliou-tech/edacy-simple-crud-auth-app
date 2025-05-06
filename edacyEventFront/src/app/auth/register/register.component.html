@@ -1,29 +1,60 @@
-<div class="form-v7-content">
-  <div class="form-left">
-    <img src="assets/edacy.jpg" alt="form">
-    <p class="text-1">S'inscrire</p>
-    <p class="text-2">Privaci policy & Term of service</p>
-  </div>
-  <form class="form-detail" action="#" method="post" id="myform">
-    <div class="form-row">
-      <label for="username">USERNAME</label>
-      <input type="text" name="username" id="username" class="input-text">
+<div class="form-container">
+  <form class="example-form">
+    <h3 class="text-center">S'inscrire</h3>
+
+    <mat-error class="error-message text-center" *ngIf="erroField">
+      {{ message }}
+    </mat-error>
+
+    <!-- Champs du formulaire -->
+    <mat-form-field class="example-full-width">
+      <mat-label>Nom & Prénom</mat-label>
+      <textarea matInput placeholder="Nom & Prénom" [(ngModel)]="this.user.fullName" name="fullName"></textarea>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Email</mat-label>
+      <input matInput placeholder="Email" [(ngModel)]="this.user.email" name="email">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Adresse</mat-label>
+      <input matInput placeholder="Adresse" [(ngModel)]="this.user.adresse" name="adresse">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Téléphone</mat-label>
+      <input matInput placeholder="Téléphone" [(ngModel)]="this.user.telephone" name="telephone">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Password</mat-label>
+      <input matInput  type="password" placeholder="password" [(ngModel)]="this.user.password" name="password">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>username</mat-label>
+      <input matInput   placeholder="username" [(ngModel)]="this.user.username" name="username">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Choisir le Rôle</mat-label>
+      <mat-select placeholder="Nom Rôle" [(ngModel)]="selectedRole" name="profile">
+        <mat-option [value]="'ADMIN'">Administrateur</mat-option>
+        <mat-option [value]="'User'">Utilisateurs</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Bouton centré -->
+    <div class="button-center">
+      <button mat-raised-button color="primary" (click)="saveUser()">S'inscrire</button>
     </div>
-    <div class="form-row">
-      <label for="your_email">E-MAIL</label>
-      <input type="text" name="your_email" id="your_email" class="input-text" required pattern="[^@]+@[^@]+.[a-zA-Z]{2,6}">
-    </div>
-    <div class="form-row">
-      <label for="password">PASSWORD</label>
-      <input type="password" name="password" id="password" class="input-text" required>
-    </div>
-    <div class="form-row">
-      <label for="comfirm_password">CONFIRM PASSWORD</label>
-      <input type="password" name="comfirm_password" id="comfirm_password" class="input-text" required>
-    </div>
-    <div class="form-row-last">
-      <input type="submit" name="register" class="register" value="Register">
-      <p>Or<a href="#">Se Connecter</a></p>
+
+    <!-- Lien centré -->
+    <div class="login-redirect">
+      Déjà un compte ? <a routerLink="/login">Se connecter</a>
     </div>
   </form>
 </div>
+
+<mat-progress-bar mode="indeterminate" *ngIf="showSpinner"></mat-progress-bar>
